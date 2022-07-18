@@ -79,4 +79,4 @@
             publisher: MicrosoftWindowsServer
             sku: 2019-Datacenter
             version: latest
-      no_log: true
+      no_log: false
