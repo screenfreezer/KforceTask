@@ -4,7 +4,7 @@
   tasks:
     - name: Create resource group
       azure_rm_resourcegroup:
-        name: "{{ kForce-rg }}"
+        name: "{{ resource_group }}"
         location: eastus2
    
     - name: Create virtual network
