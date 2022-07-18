@@ -75,7 +75,7 @@
       azure_rm_virtualmachine:
         resource_group: kForce-rg
         name: win-vm-1
-        vm_size: Standard_DS1_v2
+        vm_size: Standard_B1s
         admin_username: azureuser
         admin_password: "kForce123@@"
         network_interfaces: nic
@@ -83,6 +83,6 @@
         image:
             offer: WindowsServer
             publisher: MicrosoftWindowsServer
-            sku: 2022-datacenter-core-smalldisk-g2
+            sku: 2019-Datacenter-gensecond
             version: latest
       no_log: false
