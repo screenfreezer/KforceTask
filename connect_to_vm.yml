@@ -1,5 +1,6 @@
----
-- vars:
+
+- hosts: all
+  vars:
     ansible_user: "{{ username }}"
     ansible_password: "{{ password }}"
     ansible_connection: winrm
