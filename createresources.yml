@@ -24,7 +24,7 @@
       azure_rm_subnet:
         resource_group: kForce-rg
         name: public-subnet-2
-        address_prefix: "10.10.1.0/24"
+        address_prefix: "10.0.2.0/24"
         virtual_network: vNet
 
 
