@@ -1,6 +1,5 @@
 ---
-- hosts: 20.122.58.193
-  vars_prompt:
+- vars_prompt:
     - name: "{{ password }}"
       prompt: "Enter local administrator password"
   vars:
