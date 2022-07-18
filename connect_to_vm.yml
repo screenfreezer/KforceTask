@@ -1,5 +1,5 @@
 
-- hosts: 20.122.58.193
+- hosts: WindowsHosts
   vars:
     ansible_user: "{{ username }}"
     ansible_password: "{{ password }}"
