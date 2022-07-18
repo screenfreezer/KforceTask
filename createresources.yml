@@ -32,7 +32,7 @@
       azure_rm_publicipaddress:
         resource_group: kForce-rg
         allocation_method: Static
-        name: public-static-ip
+        name: public_static_ip
       register: output_ip_address
 
     - name: Output public IP
