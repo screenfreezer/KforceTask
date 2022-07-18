@@ -86,15 +86,15 @@
         resource_group: "{{ resource_group }}"
         name: win-vm
         vm_size: "{{ vm_size }}"
-        admin_username: azureuser
-        admin_password: "roboman137##N"
+        admin_username: "{{ username }}" 
+        admin_password: "{{ password }}" 
         network_interfaces: nic
-        os_type: Windows
+        os_type: "{{ os_type }}"
         image:
-            offer: WindowsServer
-            publisher: MicrosoftWindowsServer
-            sku: 2019-Datacenter
-            version: latest
+            offer: "{{ offer }}"
+            publisher: "{{ publisher }}"
+            sku: "{{ sku }}"
+            version: "{{ version }}"
       no_log: false
 
     - name: Create VM script extension to enable HTTPS WinRM listener
