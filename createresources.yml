@@ -4,7 +4,7 @@
   tasks:
     - name: Create resource group
       azure_rm_resourcegroup:
-        name: kForce-rg
+        name: "{{ resource_group }}"
         location: eastus2
    
     - name: Create virtual network
@@ -86,6 +86,7 @@
             sku: 2019-Datacenter
             version: latest
       no_log: false
+<<<<<<< HEAD
 
     - name: Create VM script extension to enable HTTPS WinRM listener
     azure_rm_virtualmachineextension:
