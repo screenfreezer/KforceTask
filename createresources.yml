@@ -6,6 +6,7 @@
       azure_rm_securitygroup:
           resource_group: kForce
           name: myNetworkSecurityGroup
+          state: absent
           rules:
             - name: SSH
               protocol: Tcp
