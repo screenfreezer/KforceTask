@@ -16,6 +16,25 @@
     - name: Add subnet
       azure_rm_subnet:
         resource_group: kForce-rg
-        name: kForceSubnet
-        address_prefix: "10.0.1.0/24"
+        name: public-subnet-1
+        address_prefix: "10.10.1.0/24"
         virtual_network: vNet
+
+    - name: Add subnet
+      azure_rm_subnet:
+        resource_group: kForce-rg
+        name: public-subnet-2
+        address_prefix: "10.11.1.0/24"
+        virtual_network: vNet
+
+
+    - name: Create public IP address
+      azure_rm_publicipaddress:
+        resource_group: kForce-rg
+        allocation_method: Static
+        name: public-static-ip
+      register: output_ip_address
+
+    - name: Output public IP
+      debug:
+        msg: "The public IP is {{ output_ip_address.state.ip_address }}"
