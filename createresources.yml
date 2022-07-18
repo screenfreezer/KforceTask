@@ -7,8 +7,8 @@
         name: kForce-rg
         location: eastus
    
-     - name: Create virtual network
-        azure_rm_virtualnetwork:
+    - name: Create virtual network
+      azure_rm_virtualnetwork:
         resource_group: ansible-rg
         name: vNet
         address_prefixes: "10.0.0.0/16"
