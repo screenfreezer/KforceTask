@@ -73,16 +73,16 @@
 
     - name: Create VM
       azure_rm_virtualmachine:
-        resource_group: kForce-rg
-        name: win-vm-1
-        vm_size: Standard_B1s
+        resource_group: myResourceGroup
+        name: win-vm
+        vm_size: Standard_DS1_v2
         admin_username: azureuser
-        admin_password: "kForce123@@"
+        admin_password: "{{ password }}"
         network_interfaces: nic
         os_type: Windows
         image:
             offer: WindowsServer
             publisher: MicrosoftWindowsServer
-            sku: 2022-Datacenter
+            sku: 2019-Datacenter
             version: latest
       no_log: false
