@@ -4,7 +4,7 @@
   tasks:
     - name: Create Network Security Group that allows SSH
       azure_rm_securitygroup:
-          resource_group: devops-interview-gauntlet-x-rkandel
+          resource_group: kForce
           name: myNetworkSecurityGroup
           rules:
             - name: SSH
