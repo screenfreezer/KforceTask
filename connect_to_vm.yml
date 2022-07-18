@@ -1,9 +1,7 @@
 ---
-- vars_prompt:
-    - name: password
-      prompt: "Enter local administrator password"
-  vars:
+- vars:
     ansible_user: "{{ username }}"
+    ansible_password: "{{ password }}"
     ansible_connection: winrm
     ansible_winrm_transport: ntlm
     ansible_winrm_server_cert_validation: ignore
