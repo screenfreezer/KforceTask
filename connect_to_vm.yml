@@ -1,6 +1,6 @@
 ---
 - vars_prompt:
-    - name: "{{ password }}"
+    - name: password
       prompt: "Enter local administrator password"
   vars:
     ansible_user: "{{ username }}"
