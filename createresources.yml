@@ -44,6 +44,12 @@
         resource_group: kForce-rg
         name: kForceNetworkSecurityGroup
         rules:
+          - name: 'allow_rdp'
+            protocol: Tcp
+            destination_port_range: 3389
+            access: Allow
+            priority: 1001
+            direction: Inbound
           - name: 'allow_web_traffic'
             protocol: Tcp
             destination_port_range:
@@ -77,6 +83,6 @@
         image:
             offer: WindowsServer
             publisher: MicrosoftWindowsServer
-            sku: 2019-Datacenter
+            sku: 2022-datacenter-core-smalldisk-g2
             version: latest
       no_log: false
