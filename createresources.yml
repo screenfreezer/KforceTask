@@ -38,3 +38,29 @@
     - name: Output public IP
       debug:
         msg: "The public IP is {{ output_ip_address.state.ip_address }}"
+
+    - name: Create Network Security Group
+      azure_rm_securitygroup:
+        resource_group: kForce-rg
+        name: kForceNetworkSecurityGroup
+        rules:
+          - name: 'allow_web_traffic'
+            protocol: Tcp
+            destination_port_range:
+              - 80
+              - 443
+            access: Allow
+            priority: 1002
+            direction: Inbound
+
+    - name: Create a network interface
+      azure_rm_networkinterface:
+        name: nic
+        resource_group: kForce-rg
+        virtual_network: vNet
+        subnet_name: public-subnet-1
+        security_group: kForceNetworkSecurityGroup
+        ip_configurations:
+          - name: default
+            public_ip_address_name: pip
+            primary: True
