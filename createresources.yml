@@ -20,14 +20,6 @@
         address_prefix: "10.0.1.0/24"
         virtual_network: vNet
 
-    - name: Add subnet
-      azure_rm_subnet:
-        resource_group: kForce-rg
-        name: public_subnet_2
-        address_prefix: "10.0.2.0/24"
-        virtual_network: vNet
-
-
     - name: Create public IP address
       azure_rm_publicipaddress:
         resource_group: kForce-rg
