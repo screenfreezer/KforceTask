@@ -9,20 +9,20 @@
    
     - name: Create virtual network
       azure_rm_virtualnetwork:
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         name: vNet
         address_prefixes: "10.0.0.0/16"
     
     - name: Add subnet 01
       azure_rm_subnet:
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         name: public-subnet-1
         address_prefix: "10.0.1.0/24"
         virtual_network: vNet
 
     - name: Add subnet 02
       azure_rm_subnet:
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         name: public-subnet-2
         address_prefix: "10.0.2.0/24"
         virtual_network: vNet
@@ -30,7 +30,7 @@
 
     - name: Create public IP address
       azure_rm_publicipaddress:
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         allocation_method: Static
         name: pip
       register: output_ip_address
@@ -41,7 +41,7 @@
 
     - name: Create Network Security Group
       azure_rm_securitygroup:
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         name: kForceNetworkSecurityGroup
         rules:
           - name: 'allow_rdp'
@@ -62,7 +62,7 @@
     - name: Create a network interface
       azure_rm_networkinterface:
         name: nic
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         virtual_network: vNet
         subnet_name: public-subnet-1
         security_group: kForceNetworkSecurityGroup
@@ -73,7 +73,7 @@
 
     - name: Create VM
       azure_rm_virtualmachine:
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         name: win-vm
         vm_size: Standard_DS1_v2
         admin_username: azureuser
@@ -86,12 +86,11 @@
             sku: 2019-Datacenter
             version: latest
       no_log: false
-<<<<<<< HEAD
-
+      
     - name: Create VM script extension to enable HTTPS WinRM listener
     azure_rm_virtualmachineextension:
       name: winrm-extension
-      resource_group: kForce-rg
+      resource_group: {{ resource_group }}
       virtual_machine_name: win-vm
       publisher: Microsoft.Compute
       virtual_machine_extension_type: CustomScriptExtension
@@ -101,7 +100,7 @@
 
     - name: Get facts for one Public IP
       azure_rm_publicipaddress_info:
-        resource_group: kForce-rg
+        resource_group: {{ resource_group }}
         name: pip
       register: publicipaddresses
 
