@@ -83,6 +83,6 @@
         image:
             offer: WindowsServer
             publisher: MicrosoftWindowsServer
-            sku: 2019-Datacenter-gensecond
+            sku: 2022-Datacenter
             version: latest
       no_log: false
