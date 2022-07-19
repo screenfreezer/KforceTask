@@ -134,35 +134,55 @@
               primary: yes
       register: lb_nic2_register 
 
-    - name: Create Windows VM 1st
-      azure_rm_virtualmachine:
-        resource_group: "{{ resource_group }}"
-        name: win-vm1
+    - name: Create VMSS
+      azure_rm_virtualmachinescaleset:
+        load_balancer: MainLoadBalancer
+        resource_group: myResourceGroup
+        name: win-vmscale
         vm_size: "{{ vm_size }}"
-        admin_username: "{{ username }}" 
+        capacity: 2
+        virtual_network_name: vNet
+        upgrade_policy: Manual
+        subnet_name: public-subnet-1
+        terminate_event_timeout_minutes: 10
+        scale_in_policy: NewestVM
+        admin_username: "{{ username }}"
         admin_password: "{{ password }}" 
-        network_interfaces: "{{ lb_nic1_register.state.name }}"
-        os_type: "{{ os_type }}"
         image:
             offer: "{{ offer }}"
             publisher: "{{ publisher }}"
             sku: "{{ sku }}"
             version: "{{ version }}"
 
-    - name: Create Windows VM 2nd
-      azure_rm_virtualmachine:
-        resource_group: "{{ resource_group }}"
-        name: win-vm2
-        vm_size: "{{ vm_size }}"
-        admin_username: "{{ username }}" 
-        admin_password: "{{ password }}" 
-        network_interfaces: "{{ lb_nic2_register.state.name }}"
-        os_type: "{{ os_type }}"
-        image:
-            offer: "{{ offer }}"
-            publisher: "{{ publisher }}"
-            sku: "{{ sku }}"
-            version: "{{ version }}"
+    # - name: Create Windows VM 1st
+    #   azure_rm_virtualmachine:
+    #     resource_group: "{{ resource_group }}"
+    #     name: win-vm1
+    #     vm_size: "{{ vm_size }}"
+    #     admin_username: "{{ username }}" 
+    #     admin_password: "{{ password }}" 
+    #     network_interfaces: "{{ lb_nic1_register.state.name }}"
+    #     os_type: "{{ os_type }}"
+    #     image:
+    #         offer: "{{ offer }}"
+    #         publisher: "{{ publisher }}"
+    #         sku: "{{ sku }}"
+    #         version: "{{ version }}"
+
+    # - name: Create Windows VM 2nd
+    #   azure_rm_virtualmachine:
+    #     resource_group: "{{ resource_group }}"
+    #     name: win-vm2
+    #     vm_size: "{{ vm_size }}"
+    #     admin_username: "{{ username }}" 
+    #     admin_password: "{{ password }}" 
+    #     network_interfaces: "{{ lb_nic2_register.state.name }}"
+    #     os_type: "{{ os_type }}"
+    #     image:
+    #         offer: "{{ offer }}"
+    #         publisher: "{{ publisher }}"
+    #         sku: "{{ sku }}"
+    #         version: "{{ version }}"
 
 
 
@@ -170,7 +190,7 @@
       azure_rm_virtualmachineextension:
         name: winrm-extension
         resource_group: "{{ resource_group }}"
-        virtual_machine_name: win-vm
+        virtual_machine_name: win-vmscale
         publisher: Microsoft.Compute
         virtual_machine_extension_type: CustomScriptExtension
         type_handler_version: '1.9'
