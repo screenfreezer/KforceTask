@@ -8,7 +8,7 @@
         location: "{{ region }}"
 
     - name: "Create app service plan."
-      azure.azcollection.azure_rm_appserviceplan:
+      azure_rm_appserviceplan:
         name: "{{ app_service }}-plan"
         resource_group: "{{ resource_group }}"
         is_linux: true
@@ -16,7 +16,7 @@
         location: "{{ region}}"
 
     - name: "Deploy application from image."
-      azure.azcollection.azure_rm_webapp:
+      azure_rm_webapp:
         name: "{{ app_service }}"
         plan: "{{ app_service }}-plan"
         resource_group: "{{ resource_group}}"
@@ -27,15 +27,15 @@
         https_only: true
         location: "{{ region }}"
 
-    - name: "Create v network for webapp."
-      azure.azcollection.azure_rm_virtualnetwork:
+    - name: "Create virtual network for webapp."
+      azure_rm_virtualnetwork:
         name: "{{ app_service }}-vnet"
         resource_group: "{{ resource_group }}"
         address_prefixes_cidr:
           - "10.2.0.0/27"
 
     - name: "Create default subnet for virtual network."
-      azure.azcollection.azure_rm_subnet:
+      azure_rm_subnet:
         name: "default"
         resource_group: "{{ resource_group}}"
         virtual_network_name: "{{ app_service }}-vnet"
@@ -44,12 +44,12 @@
           - name: "Microsoft.Web/serverFarms"
             serviceName: "Microsoft.Web/serverFarms"      
 
-    - name: "Configure web app with virtual network."
-      azure.azcollection.azure_rm_webappvnetconnection:
-        name: "{{ app_service}}"
-        resource_group: "{{ resource_group}}"
-        vnet_name: "{{ app_service_name }}-vnet"
-        subnet: "default"                
+    # - name: "Configure web app with virtual network."
+    #   azure.azcollection.azure_rm_webappvnetconnection:
+    #     name: "{{ app_service}}"
+    #     resource_group: "{{ resource_group}}"
+    #     vnet_name: "{{ app_service_name }}-vnet"
+    #     subnet: "default"                
 
     - name: "Display new url."
       debug:
