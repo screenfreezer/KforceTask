@@ -136,8 +136,7 @@
 
     - name: Create VMSS
       azure_rm_virtualmachinescaleset:
-        load_balancer: MainLoadBalancer
-        resource_group: myResourceGroup
+        resource_group: "{{ resource_group }}"
         name: win-vmscale
         vm_size: "{{ vm_size }}"
         capacity: 2
@@ -153,6 +152,7 @@
             publisher: "{{ publisher }}"
             sku: "{{ sku }}"
             version: "{{ version }}"
+        load_balancer: MainLoadBalancer    
 
     # - name: Create Windows VM 1st
     #   azure_rm_virtualmachine:
