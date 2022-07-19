@@ -147,6 +147,7 @@
         scale_in_policy: NewestVM
         admin_username: "{{ username }}"
         admin_password: "{{ password }}" 
+        os_type: "{{ os_type }}"
         image:
             offer: "{{ offer }}"
             publisher: "{{ publisher }}"
