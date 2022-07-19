@@ -110,7 +110,9 @@
         name: MainLoadBalancer
         frontend_ip_configurations:
           - name: frontendipconf0
-            public_ip_address: lbpip 
+            public_ip_address: lbpip
+        backend_address_pools:
+          - name: backendaddrpool0
         probes:
           - name: prob0
             port: 80
