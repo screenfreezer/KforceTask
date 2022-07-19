@@ -62,6 +62,14 @@
           number_of_workers: 1
         resource_group: "{{ resource_group}}"
         
+  # - name: Scale up the App service plan
+  #   azure_rm_appserviceplan:
+  #     resource_group: "{{ resource_group }}"
+  #     name: "{{ plan_name }}"
+  #     is_linux: true
+  #     sku: S2
+  #     number_of_workers: 3        
+        
     - name: Get facts
       azure_rm_appserviceplan_info:
         resource_group: "{{ resource_group }}"
