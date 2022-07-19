@@ -137,7 +137,7 @@
     - name: Create VMSS
       azure_rm_virtualmachinescaleset:
         resource_group: "{{ resource_group }}"
-        name: win-vmscale
+        name: winvmscl
         vm_size: "{{ vm_size }}"
         capacity: 2
         virtual_network_name: vNet
