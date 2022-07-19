@@ -7,15 +7,6 @@
         name: "{{ resource_group }}"
         location: "{{ region }}"
 
-    # - name: "Create app service plan."
-    #   azure_rm_appserviceplan:
-    #     name: "{{ app_service }}"
-    #     resource_group: "{{ resource_group }}"
-    #     is_linux: true
-    #     sku: "{{ app_service_plan_sku }}"
-    #     location: "{{ region}}"
-    #     number_of_workers: 1
-
     - name: "Deploy application from image."
       azure_rm_webapp:
         name: "{{ app_service }}"
@@ -45,10 +36,7 @@
         name: "default"
         resource_group: "{{ resource_group}}"
         virtual_network_name: "{{ app_service }}-vnet"
-        address_prefix_cidr: "10.2.0.0/28"
-        delegations:
-          - name: "Microsoft.Web/serverFarms"
-            serviceName: "Microsoft.Web/serverFarms"      
+        address_prefix_cidr: "10.2.0.0/28"    
 
     # - name: "Configure web app with virtual network."
     #   azure.azcollection.azure_rm_webappvnetconnection:
