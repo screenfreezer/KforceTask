@@ -108,7 +108,7 @@
           - name: vmnic
             public_ip_address_name: pip
             primary: True        
-          - name: lbnic
+          - name: default
             public_ip_address_name: lbpip
             load_balancer_backend_address_pools:
               - "{{ loadbalancer.state.backend_address_pools[0].id }}"
