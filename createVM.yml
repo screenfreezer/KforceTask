@@ -166,7 +166,7 @@
       azure_rm_virtualmachineextension:
         name: winrm-extension
         resource_group: "{{ resource_group }}"
-        virtual_machine_name: win-vmscale
+        virtual_machine_name: win-vm1
         publisher: Microsoft.Compute
         virtual_machine_extension_type: CustomScriptExtension
         type_handler_version: '1.9'
