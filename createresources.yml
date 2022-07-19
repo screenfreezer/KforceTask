@@ -104,32 +104,42 @@
             probe: prob0
       register: loadbalancer
 
-    - name: Create a network interface for Instance
+    - name: Create virtual network interface card for instance and VM
       azure_rm_networkinterface:
+        resource_group: "{{ resource_group }}"
         name: nic
-        resource_group: "{{ resource_group }}"
         virtual_network: vNet
-        subnet_name: public-subnet-1
+        subnet: public-subnet-1
         security_group: kForceNetworkSecurityGroup
-        ip_configurations:
-          - name: vmnic
-            public_ip_address_name: pip
-            primary: True           
+        load_balancer: loadbalancer
+        public_ip: False
 
-    - name: Create a network interface for Loadbalancer
-      azure_rm_networkinterface:
-        name: loadBalancer_nic
-        resource_group: "{{ resource_group }}"
-        virtual_network: vNet
-        subnet_name: public-subnet-1
-        security_group: kForceNetworkSecurityGroup
-        ip_configurations:       
-          - name: lbnic
-            public_ip_address_name: nicpip
-            load_balancer_backend_address_pools:
-              - "{{ loadbalancer.state.backend_address_pools[0].id }}"
-              - name: backendaddrpool0
-                load_balancer: MainLoadBalancer
+    # - name: Create a network interface for Instance
+    #   azure_rm_networkinterface:
+    #     name: nic
+    #     resource_group: "{{ resource_group }}"
+    #     virtual_network: vNet
+    #     subnet_name: public-subnet-1
+    #     security_group: kForceNetworkSecurityGroup
+    #     ip_configurations:
+    #       - name: vmnic
+    #         public_ip_address_name: pip
+    #         primary: True           
+
+    # - name: Create a network interface for Loadbalancer
+    #   azure_rm_networkinterface:
+    #     name: loadBalancer_nic
+    #     resource_group: "{{ resource_group }}"
+    #     virtual_network: vNet
+    #     subnet_name: public-subnet-1
+    #     security_group: kForceNetworkSecurityGroup
+    #     ip_configurations:       
+    #       - name: lbnic
+    #         public_ip_address_name: nicpip
+    #         load_balancer_backend_address_pools:
+    #           - "{{ loadbalancer.state.backend_address_pools[0].id }}"
+    #           - name: backendaddrpool0
+    #             load_balancer: MainLoadBalancer
 
     - name: Create VM
       azure_rm_virtualmachine:
