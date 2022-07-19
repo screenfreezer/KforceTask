@@ -144,6 +144,7 @@
         upgrade_policy: Manual
         subnet_name: public-subnet-1
         public_ip_per_vm: True
+        orchestration_mode: Flexible
         # terminate_event_timeout_minutes: 10
         # scale_in_policy: NewestVM
         admin_username: "{{ username }}"
