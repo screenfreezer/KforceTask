@@ -89,7 +89,7 @@
         name: MainLoadBalancer
         frontend_ip_configurations:
           - name: frontendipconf0
-            public_ip_address: lbpip
+            public_ip_address: "{{ output_lbpip_address.state.name }}"
         backend_address_pools:
           - name: backendaddrpool0
         probes:
@@ -104,15 +104,22 @@
             probe: prob0
       register: loadbalancer
 
-    - name: Create virtual network interface card for instance and VM
+    - name: Create a network interface for Loadbalancer
       azure_rm_networkinterface:
-        resource_group: "{{ resource_group }}"
-        name: nic
-        virtual_network: vNet
-        subnet: public-subnet-1
-        security_group: kForceNetworkSecurityGroup
-        load_balancer: loadbalancer
-        public_ip: False
+          name: loadBalancer_nic
+          resource_group: "{{ resource_group }}"
+          virtual_network: vNet
+          subnet_name: public-subnet-1
+          security_group: kForceNetworkSecurityGroup
+          ip_configurations:       
+            - name: lbnic
+              public_ip_address_name: nicpip
+              load_balancer_backend_address_pools:
+                - "{{ loadbalancer.state.backend_address_pools[0].id }}"
+              primary: yes
+      register: lb_nic_register      
+                # - name: backendaddrpool0
+                #   load_balancer: MainLoadBalancer
 
     # - name: Create a network interface for Instance
     #   azure_rm_networkinterface:
@@ -148,7 +155,7 @@
         vm_size: "{{ vm_size }}"
         admin_username: "{{ username }}" 
         admin_password: "{{ password }}" 
-        network_interfaces: nic
+        network_interfaces: "{{ nic_webapp1nic.state.name }}"
         os_type: "{{ os_type }}"
         image:
             offer: "{{ offer }}"
