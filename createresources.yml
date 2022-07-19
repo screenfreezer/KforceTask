@@ -163,7 +163,7 @@
     - name: Get facts for one Public IP
       azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
-        name: pip
+        name: vmpip
       register: publicipaddresses
 
     - name: set public ip address fact
