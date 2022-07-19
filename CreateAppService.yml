@@ -37,20 +37,13 @@
         resource_group: "{{ resource_group}}"
         virtual_network_name: "{{ app_service }}-vnet"
         address_prefix_cidr: "10.2.0.0/28"    
-
-    # - name: "Configure web app with virtual network."
-    #   azure.azcollection.azure_rm_webappvnetconnection:
-    #     name: "{{ app_service}}"
-    #     resource_group: "{{ resource_group}}"
-    #     vnet_name: "{{ app_service_name }}-vnet"
-    #     subnet: "default"                
-
+        
     - name: "Display new url."
       debug:
         msg: "Application is now available at https://{{ app_service }}.azurewebsites.net/"
 
     - name: Get facts of existing App service plan
-      azure_rm_appserviceplan_facts:
+      azure_rm_appserviceplan_info:
         resource_group: "{{ resource_group }}"
         name: "{{ app_service }}-plan"
       register: facts
@@ -58,13 +51,15 @@
     - debug: 
         var: facts.appserviceplans[0].sku
 
-    - name: Scale up the App service plan
-      azure_rm_appserviceplan:
-        resource_group: "{{ resource_group }}"
+    - name: "scaling up the Web App"
+      azure_rm_webapp:
         name: "{{ app_service }}-plan"
-        is_linux: true
-        sku: "{{ app_service_plan_sku }}"
-        number_of_workers: 3
+        plan:
+          resource_group: "{{ resource_group }}"
+          name: "{{ app_service }}-plan"
+          is_linux: true
+          sku: S1
+          number_of_workers: 3
         
     - name: Get facts
       azure_rm_appserviceplan_facts:
