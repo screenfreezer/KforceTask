@@ -53,7 +53,7 @@
 
     - name: Output public IP
       debug:
-        msg: "The public IP is {{ output_ip_address.state.ip_address }}"
+        msg: "The public IP is {{ output_vm1ip_address.state.ip_address }} && {{ output_vm1ip_address.state.ip_address }}"
 
     - name: Create Network Security Group
       azure_rm_securitygroup:
