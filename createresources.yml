@@ -33,14 +33,7 @@
         resource_group: "{{ resource_group }}"
         allocation_method: Static
         name: pip
-      register: output_ip_address
-
-    - name: Create public IP address
-      azure_rm_publicipaddress:
-        resource_group: "{{ resource_group }}"
-        allocation_method: Static
-        name: lbpip
-      register: output_lbpip_address      
+      register: output_ip_address 
 
     - name: Create public IP address
       azure_rm_publicipaddress:
