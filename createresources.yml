@@ -125,7 +125,7 @@
         security_group: kForceNetworkSecurityGroup
         ip_configurations:       
           - name: lbnic
-            public_ip_address_name: lbpip
+            public_ip_address_name: nicpip
             load_balancer_backend_address_pools:
               - "{{ loadbalancer.state.backend_address_pools[0].id }}"
               - name: backendaddrpool0
