@@ -114,6 +114,8 @@
           ip_configurations:       
             - name: vm1-nic-ip
               public_ip_address_name: vm1pip
+              load_balancer_backend_address_pools:
+                - "{{ loadbalancer.state.backend_address_pools[0].id }}"
               primary: yes
       register: lb_nic1_register      
 
