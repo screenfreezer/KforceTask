@@ -155,7 +155,7 @@
         vm_size: "{{ vm_size }}"
         admin_username: "{{ username }}" 
         admin_password: "{{ password }}" 
-        network_interfaces: "{{ nic_webapp1nic.state.name }}"
+        network_interfaces: "{{ lb_nic_register.state.name }}"
         os_type: "{{ os_type }}"
         image:
             offer: "{{ offer }}"
