@@ -118,7 +118,7 @@
 
     - name: Create a network interface for Loadbalancer
       azure_rm_networkinterface:
-        name: nic
+        name: loadBalancer_nic
         resource_group: "{{ resource_group }}"
         virtual_network: vNet
         subnet_name: public-subnet-1
