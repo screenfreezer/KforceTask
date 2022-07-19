@@ -47,7 +47,7 @@
 
     - name: "Display new url."
       debug:
-        msg: "Application is now available at https://{{ app_service_name }}.azurewebsites.net/"
+        msg: "Application is now available at https://{{ app_service }}.azurewebsites.net/"
 
     - name: Get facts of existing App service plan
       azure_rm_appserviceplan_facts:
