@@ -119,12 +119,12 @@
               primary: yes
       register: lb_nic1_register      
 
-    - name: Create a network interface for 2nt VM
+    - name: Create a network interface for 2nd VM
       azure_rm_networkinterface:
           name: nic2
           resource_group: "{{ resource_group }}"
           virtual_network: vNet
-          subnet_name: public-subnet-2
+          subnet_name: public-subnet-1
           security_group: kForceNetworkSecurityGroup
           ip_configurations:       
             - name: vm2-nic-ip
