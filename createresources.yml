@@ -42,6 +42,13 @@
         name: lbpip
       register: output_lbpip_address      
 
+    - name: Create public IP address
+      azure_rm_publicipaddress:
+        resource_group: "{{ resource_group }}"
+        allocation_method: Static
+        name: lbpip
+      register: output_lbpip_address      
+
     - name: Output public IP
       debug:
         msg: "The public IP is {{ output_ip_address.state.ip_address }}"
