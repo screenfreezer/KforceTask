@@ -27,7 +27,7 @@
   - name: Copy cat images to wwwroot
     win_copy:
       src: artifacts/images/cats.jpg
-      dest: C:\inetpub\wwwroot\images\cats.jpg
+      dest: C:\inetpub\wwwroot\cats.jpg
       force: yes      
   
   - name: install net core iis hosting module with no frameworks
