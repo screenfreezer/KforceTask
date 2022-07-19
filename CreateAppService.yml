@@ -54,3 +54,29 @@
     - name: "Display new url."
       debug:
         msg: "Application is now available at https://{{ app_service_name }}.azurewebsites.net/"
+
+    - name: Get facts of existing App service plan
+      azure_rm_appserviceplan_facts:
+        resource_group: "{{ resource_group }}"
+        name: "{{ app_service }}-plan"
+      register: facts
+
+    - debug: 
+        var: facts.appserviceplans[0].sku
+
+    - name: Scale up the App service plan
+      azure_rm_appserviceplan:
+        resource_group: "{{ resource_group }}"
+        name: "{{ app_service }}-plan"
+        is_linux: true
+        sku: "{{ app_service_plan_sku }}"
+        number_of_workers: 3
+        
+    - name: Get facts
+      azure_rm_appserviceplan_facts:
+        resource_group: "{{ resource_group }}"
+        name: "{{ app_service }}-plan"
+      register: facts
+
+    - debug: 
+        var: facts.appserviceplans[0].sku        
