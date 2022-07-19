@@ -58,12 +58,12 @@
           resource_group: "{{ resource_group }}"
           name: "{{ app_service }}-plan"
           is_linux: true
-          sku: S1
-          number_of_workers: 3
+          sku: B1
+          number_of_workers: 1
         resource_group: "{{ resource_group}}"
         
     - name: Get facts
-      azure_rm_appserviceplan_facts:
+      azure_rm_appserviceplan_info:
         resource_group: "{{ resource_group }}"
         name: "{{ app_service }}-plan"
       register: facts
