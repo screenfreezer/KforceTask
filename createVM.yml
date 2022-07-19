@@ -148,6 +148,7 @@
         admin_username: "{{ username }}"
         admin_password: "{{ password }}" 
         os_type: "{{ os_type }}"
+        managed_disk_type: Standard_LRS
         image:
             offer: "{{ offer }}"
             publisher: "{{ publisher }}"
