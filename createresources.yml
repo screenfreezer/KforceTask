@@ -28,21 +28,21 @@
         virtual_network: vNet
 
 
-    - name: Create public IP address
+    - name: Create public VM IP address
       azure_rm_publicipaddress:
         resource_group: "{{ resource_group }}"
         allocation_method: Static
-        name: pip
+        name: vmpip
       register: output_ip_address 
 
-    - name: Create public IP address
+    - name: Create public LB IP address
       azure_rm_publicipaddress:
         resource_group: "{{ resource_group }}"
         allocation_method: Static
         name: lbpip
       register: output_lbpip_address      
 
-    - name: Create public IP address
+    - name: Create public NIC IP address
       azure_rm_publicipaddress:
         resource_group: "{{ resource_group }}"
         allocation_method: Static
@@ -104,7 +104,7 @@
             probe: prob0
       register: loadbalancer
 
-    - name: Create a network interface
+    - name: Create a network interface for Instance
       azure_rm_networkinterface:
         name: nic
         resource_group: "{{ resource_group }}"
@@ -114,9 +114,18 @@
         ip_configurations:
           - name: vmnic
             public_ip_address_name: pip
-            primary: True        
+            primary: True           
+
+    - name: Create a network interface for Loadbalancer
+      azure_rm_networkinterface:
+        name: nic
+        resource_group: "{{ resource_group }}"
+        virtual_network: vNet
+        subnet_name: public-subnet-1
+        security_group: kForceNetworkSecurityGroup
+        ip_configurations:       
           - name: lbnic
-            public_ip_address_name: nicpip
+            public_ip_address_name: lbpip
             load_balancer_backend_address_pools:
               - "{{ loadbalancer.state.backend_address_pools[0].id }}"
               - name: backendaddrpool0
