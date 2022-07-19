@@ -14,8 +14,6 @@
     groups: scalesethosts
     hostname: "{{ output_ip_address.publicipaddresses[0].ip_address }}_{{ item.properties.frontendPort }}"
     ansible_host: "{{ output_ip_address.publicipaddresses[0].ip_address }}"
-    ansible_port: "{{ item.properties.frontendPort }}"
-    ansible_ssh_user: "{{ admin_username }}"
-    ansible_ssh_pass: "{{ admin_password }}"
+    # ansible_port: "{{ item.properties.frontendPort }}"
   with_items:
     - "{{ output.ansible_info.azure_loadbalancers[0].properties.inboundNatRules }}"
