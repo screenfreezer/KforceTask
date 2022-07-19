@@ -105,9 +105,11 @@
         subnet_name: public-subnet-1
         security_group: kForceNetworkSecurityGroup
         ip_configurations:
-          - name: default
+          - name: vmnic
             public_ip_address_name: pip
-            primary: True
+            primary: True        
+          - name: lbnic
+            public_ip_address_name: lbpip
             load_balancer_backend_address_pools:
               - "{{ loadbalancer.state.backend_address_pools[0].id }}"
               - name: backendaddrpool0
