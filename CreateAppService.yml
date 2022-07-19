@@ -45,7 +45,7 @@
             serviceName: "Microsoft.Web/serverFarms"      
 
     - name: "Configure web app with virtual network."
-      azure_rm_webappvnetconnection:
+      azure.azcollection.azure_rm_webappvnetconnection:
         name: "{{ app_service}}"
         resource_group: "{{ resource_group}}"
         vnet_name: "{{ app_service_name }}-vnet"
