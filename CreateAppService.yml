@@ -9,7 +9,7 @@
 
     - name: "Create app service plan."
       azure_rm_appserviceplan:
-        name: "{{ app_service }}-plan"
+        name: "{{ app_service }}"
         resource_group: "{{ resource_group }}"
         is_linux: true
         sku: "{{ app_service_plan_sku }}"
@@ -18,7 +18,7 @@
     - name: "Deploy application from image."
       azure_rm_webapp:
         name: "{{ app_service }}"
-        plan: "{{ app_service }}-plan"
+        plan: "{{ app_service }}"
         resource_group: "{{ resource_group}}"
         container_settings:
           name: "mcr.microsoft.com/appsvc/staticsite:latest"
