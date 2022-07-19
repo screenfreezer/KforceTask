@@ -20,9 +20,15 @@
 
   - name: Copy index.html to wwwroot
     win_copy:
-      src: index.html
+      src: artifacts/index.html
       dest: C:\inetpub\wwwroot\index.html
       force: yes
+  
+  - name: Copy cat images to wwwroot
+    win_copy:
+      src: artifacts/images/cats.jpg
+      dest: C:\inetpub\wwwroot\images\cats.jpg
+      force: yes      
   
   - name: install net core iis hosting module with no frameworks
     win_chocolatey:
