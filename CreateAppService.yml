@@ -19,7 +19,12 @@
     - name: "Deploy application from image."
       azure_rm_webapp:
         name: "{{ app_service }}"
-        plan: "{{ app_service }}"
+        plan:
+          resource_group: "{{ resource_group }}"
+          name: "{{ app_service }}-plan"
+          is_linux: true
+          sku: S1
+          number_of_workers: 1
         resource_group: "{{ resource_group}}"
         container_settings:
           name: "mcr.microsoft.com/appsvc/staticsite:latest"
